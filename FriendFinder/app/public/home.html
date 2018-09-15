@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Star Wars - Express</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Welcome to Friend Finder!</h1>
+      <h3>Find your Friends Here!</h3>
+      <hr>
+      <button class="btn btn-danger btn-lg"><span class="fa fa-plus"></span> Find New Friend button
+    </div>
+    <div class="row">
+
+      <div class="col-12">
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3><strong>Friend Search</strong></h3>
+          </div>
+          <div class="card-body">
+            <input type="text" id="character-search" class="form-control">
+            <br>
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary btn-md" id="search-btn"><span class="fa fa-search"></span> Search
+                For Friends. </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3><strong>Friend Profile</strong></h3>
+          </div>
+          <div class="card-body">
+            <h2 id="name">Example</h2>
+            <div id="stats">
+              <h3><strong>Question 1: What is your name?</strong> <span id="name">Sarah</span></h3>
+              <h3><strong>Question 2: What is your favorite color?</strong> <span id="favColor">Green</span></h3>
+              <h3><strong>Question 3: What is your birthday?</strong> <span id="birthday">April 10, 1991</span></h3>
+              <h3><strong>Question 4: What is your profession?</strong> <span id="career">Compensation Analyst</span></h3>
+              <h3><strong>Question 3: What are your hobbies?</strong> <span id="hobbies">Painting</span></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    // QUESTION: What is this code doing?
+    $("#search-btn").on("click", function() {
+      var searchedFriend = $("#friend-search").val().trim();
+
+      // Using a RegEx Pattern to remove spaces from searchedCharacter
+      // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+      searchedFriend = searchedFriend.replace(/\s+/g, "").toLowerCase();
+
+      // QUESTION: What does $.get do? What are the parameters it is expecting?
+      $.get("/api/characters/" + searchedFriend, function(data) {
+        console.log(data);
+        if (data) {
+          $("#stats").show();
+          $("#name").text(data.name);
+          $("#favColor").text(data.favColor);
+          $("#birthday").text(data.birhday);
+          $("#career").text(data.career);
+          $("#hobbies").text(data.hobbies);
+        }
+        else {
+          $("#name").text("Friend not found.");
+          $("#stats").hide();
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
