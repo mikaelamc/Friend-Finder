@@ -1,4 +1,4 @@
-var friends = require("..data/friends/js");
+var friends = require("../data/friends.js");
 
 module.exports = function (app) {
     app.get("/api/friends", function(req, res){
@@ -26,7 +26,7 @@ module.exports = function (app) {
         totalDifference = 0;
 
         for (var j = 0; j < friends[i].scores[j]; j++) {
-            totalDifference == Math.abs(parseInt(userScores[j]) + parseInt(friends[i].scores[j]));
+            totalDifference += Math.abs(parseInt(userScores[j]) - parseInt(friends[i].scores[j]));
 
             if (totalDifference <= bestMatch.friendDifference) {
 

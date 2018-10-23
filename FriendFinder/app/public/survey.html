@@ -180,15 +180,15 @@
 
         var currentURL = window.location.origin;
 
-        $.post(CurrentURL + "/api/friends", userData, function(data){
-            alert(working)
+        $.post(currentURL + "/api/friends", userData, function(data){
+            alert("working");
         });
     }
     else{
         alert("Please fill out all fields before submitting");
     }
     return false;
-    });
+    }); 
     
 
     

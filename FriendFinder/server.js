@@ -5,11 +5,11 @@ var bodyParser = require('body-parser')
 var PORT = process.env.PORT || 8080;
 
 
-// var jsonParser = bodyParser.json()
+// var jsonParser = bodyParser.json();
 
-app.use(bodyParser.urlencodedParser({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(bodyParser.json({ type: 'application/**json'}))
+app.use(bodyParser.json({ type: 'application/*+json'}))
 
 app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
 
@@ -24,4 +24,4 @@ app.listen(PORT, function(){
 
 // jsonParser;
 
-urlencodedParser;
+// urlencodedParser;
